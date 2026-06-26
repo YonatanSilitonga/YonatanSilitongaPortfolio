@@ -1,0 +1,31 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @media (prefers-color-scheme: light) {
+      .background { fill: #18181B; }
+      .foreground { fill: #FFFFFF; }
+      .accent { fill: #A855F7; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .background { fill: #FFFFFF; }
+      .foreground { fill: #18181B; }
+      .accent { fill: #7C3AED; }
+    }
+  </style>
+  <rect class="background" width="180" height="180" rx="44" />
+  
+  <!-- Monogram YRPS -->
+  <text 
+    x="50%" 
+    y="55%" 
+    dominant-baseline="middle" 
+    text-anchor="middle" 
+    font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+    font-weight="900" 
+    font-size="52" 
+    letter-spacing="-1.5" 
+    class="foreground"
+  >YRPS</text>
+  
+  <!-- Titik Aksen Modern -->
+  <circle cx="140" cy="120" r="8" class="accent" />
+</svg>
