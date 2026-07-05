@@ -8,32 +8,34 @@ import { Textarea } from '@/components/ui/textarea'
 import { SectionTitle } from '@/components/common/SectionTitle'
 import { portfolioData } from '@/lib/portfolio-data'
 import { useState } from 'react'
+import { sendEmail } from '@/app/actions' // Import server action
 
 export function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  })
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('Formulir dikirim:', formData)
-    setSubmitted(true)
-    setTimeout(() => {
-      setSubmitted(false)
-      setFormData({ name: '', email: '', message: '' })
-    }, 3000)
+    setIsSubmitting(true)
+    setError(null)
+
+    const form = e.currentTarget
+    const formData = new FormData(form)
+
+    const result = await sendEmail(formData)
+
+    if (result.error) {
+      setError(result.error)
+      setIsSubmitting(false)
+    } else {
+      setSubmitted(true)
+      form.reset() // Reset formulir setelah berhasil
+      setTimeout(() => {
+        setSubmitted(false)
+      }, 4000)
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -129,31 +131,38 @@ export function Contact() {
               type="text"
               name="name"
               placeholder="Nama Anda"
-              value={formData.name}
-              onChange={handleChange}
               required
+              disabled={isSubmitting}
             />
             <Input
               type="email"
               name="email"
               placeholder="Email Anda"
-              value={formData.email}
-              onChange={handleChange}
               required
+              disabled={isSubmitting}
             />
           </div>
 
           <Textarea
             name="message"
             placeholder="Pesan Anda..."
-            value={formData.message}
-            onChange={handleChange}
             required
             className="min-h-32"
+            disabled={isSubmitting}
           />
 
-          <Button type="submit" className="w-full" size="lg">
-            {submitted ? '✓ Pesan Terkirim!' : 'Kirim Pesan'}
+          {error && <p className="text-sm text-red-500 text-center">{error}</p>}
+          <Button
+            type="submit"
+            className="w-full"
+            size="lg"
+            disabled={isSubmitting || submitted}
+          >
+            {isSubmitting
+              ? 'Mengirim...'
+              : submitted
+              ? '✓ Pesan Terkirim!'
+              : 'Kirim Pesan'}
           </Button>
         </motion.form>
       </div>
