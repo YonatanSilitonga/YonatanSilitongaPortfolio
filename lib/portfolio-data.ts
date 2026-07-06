@@ -352,6 +352,7 @@ export const portfolioData = {
       period: '2024',
       description: 'Mendukung mahasiswa baru selama adaptasi akademik dan orientasi kampus.',
       icon: 'graduation',
+      certificateImage: '/certificates/Asisten Matrikulasi Mahasiswa Baru.jpeg',
     },
     {
       id: 3,
@@ -359,6 +360,7 @@ export const portfolioData = {
       period: '2024 - 2025',
       description: 'Membimbing mahasiswa asrama dan mengembangkan keterampilan komunikasi serta kepemimpinan.',
       icon: 'home',
+      certificateImage: '/certificates/Mentor Asrama (Abang Asrama).jpeg',
     },
     {
       id: 4,
@@ -366,6 +368,7 @@ export const portfolioData = {
       period: '2024',
       description: 'Berkontribusi pada orientasi kampus dan penyelenggaraan acara mahasiswa baru.',
       icon: 'clipboard',
+      certificateImage: '/certificates/Anggota Panitia PCA.jpeg',
     },
   ],
 
@@ -385,6 +388,7 @@ export const portfolioData = {
       description:
         'Diakui sebagai mahasiswa terbaik atas pencapaian akademis yang luar biasa dan kontribusi kepada komunitas universitas.',
       icon: 'trophy',
+      certificateImage: '/certificates/Penghargaan Mahasiswa Terbaik.jpeg',
     },
   ],
 }
