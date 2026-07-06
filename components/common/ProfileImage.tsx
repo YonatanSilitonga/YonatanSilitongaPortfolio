@@ -20,27 +20,27 @@ export function ProfileImage({ className = '' }: ProfileImageProps) {
       whileHover={{ scale: 1.03 }}
       className={`relative ${className}`}
     >
-      {/* Efek Cahaya Latar Belakang (Glow) */}
-      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 via-primary/10 to-transparent blur-xl animate-pulse" />
+      {/* Hapus Efek Glow Latar Belakang */}
+      {/* <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 via-primary/10 to-transparent blur-xl animate-pulse" /> */}
 
-      {/* Bingkai Lingkaran Foto */}
+      {/* Bingkai Persegi Foto */}
       <div
-        className="relative w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-primary/20 to-background overflow-hidden shadow-2xl border-2 border-primary/40"
+        className="relative w-48 h-48 md:w-64 md:h-64 rounded-none bg-primary overflow-hidden border-2 border-border shadow-[8px_8px_0px_var(--shadow-color)] p-2"
       >
         <Image
           src={avatarUrl}
           alt={portfolioData.personal.name}
           fill
-          className="object-cover"
+          className="object-cover rounded-none"
           priority
         />
       </div>
 
       {/* Badge Teknologi Melayang */}
-      <FloatingBadge text="C/C++" position="top-2 -left-4" delay={0} />
-      <FloatingBadge text="Python" position="top-2 -right-4" delay={0.1} />
-      <FloatingBadge text="Laravel" position="bottom-2 -left-4" delay={0.2} />
-      <FloatingBadge text="Flutter" position="bottom-2 -right-4" delay={0.3} />
+      <FloatingBadge text="C/C++" position="top-4 -left-6" delay={0} />
+      <FloatingBadge text="Python" position="top-4 -right-6" delay={0.1} />
+      <FloatingBadge text="Laravel" position="bottom-4 -left-6" delay={0.2} />
+      <FloatingBadge text="Flutter" position="bottom-4 -right-6" delay={0.3} />
     </motion.div>
   )
 }
@@ -64,10 +64,11 @@ function FloatingBadge({
       <motion.div
         animate={{ y: [0, -8, 0] }}
         transition={{ duration: 3, delay, repeat: Infinity }}
-        className="px-3 py-1 rounded-full bg-primary/20 border border-primary/40 text-xs font-semibold text-primary whitespace-nowrap backdrop-blur-sm dark:bg-primary/30 dark:border-primary/60"
+        className="px-3 py-1 rounded-none bg-card border-2 border-border text-xs font-bold text-foreground whitespace-nowrap shadow-[3px_3px_0px_var(--shadow-color)]"
       >
         {text}
       </motion.div>
     </motion.div>
   )
 }
+

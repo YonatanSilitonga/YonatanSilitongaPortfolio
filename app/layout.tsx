@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
+import { Providers } from './providers'
 
 const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
 const geistMono = Geist_Mono({
@@ -57,26 +58,6 @@ export const viewport: Viewport = {
   ],
 }
 
-// Script untuk menginisialisasi tema SEBELUM halaman render (mencegah flash)
-const themeInitScript = `
-(function() {
-  try {
-    var saved = localStorage.getItem('theme');
-    if (saved === 'dark') {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
-    } else if (saved === 'light') {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.classList.add('light');
-    } else {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.documentElement.classList.add('dark');
-      }
-    }
-  } catch(e) {}
-})();
-`
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -88,12 +69,9 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <head>
-        {/* Script ini berjalan sebelum render untuk menghindari flash tema */}
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
+      <head />
       <body className="font-sans antialiased bg-background text-foreground">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

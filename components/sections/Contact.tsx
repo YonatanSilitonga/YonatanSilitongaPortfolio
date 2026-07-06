@@ -52,17 +52,17 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true, margin: '-100px' }}
-          className="mt-12 p-6 rounded-lg bg-gradient-to-r from-primary/10 via-primary/5 to-background border border-primary/20 text-center mb-12"
+          className="mt-12 p-6 rounded-none bg-primary border-2 border-border text-center mb-12 shadow-[8px_8px_0px_var(--shadow-color)]"
         >
-          <p className="text-lg font-semibold text-foreground">
+          <p className="text-lg font-bold text-primary-foreground">
             Terbuka untuk Peluang Magang & Kerja
           </p>
-          <p className="text-muted-foreground mt-2">
+          <p className="text-primary-foreground/80 mt-2">
             Rekayasa Perangkat Lunak, Pengembangan Backend, dan Ilmu Data
           </p>
         </motion.div>
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {/* Email */}
           <motion.a
             initial={{ opacity: 0, y: 20 }}
@@ -70,11 +70,11 @@ export function Contact() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true, margin: '-100px' }}
             href={`mailto:${portfolioData.personal.email}`}
-            className="p-6 rounded-lg border border-border bg-card/50 backdrop-blur hover:border-primary/50 transition-all text-center group"
+            className="p-6 rounded-none border-2 border-border bg-card hover:bg-accent transition-all text-center group shadow-[8px_8px_0px_var(--shadow-color)] hover:shadow-none hover:translate-x-2 hover:translate-y-2"
           >
-            <Mail className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
-            <h3 className="font-semibold mb-2">Email</h3>
-            <p className="text-sm text-muted-foreground hover:text-primary transition-colors break-all">
+            <Mail className="w-8 h-8 text-foreground mx-auto mb-3 group-hover:scale-110 transition-transform" />
+            <h3 className="font-bold mb-2">Email</h3>
+            <p className="text-sm text-muted-foreground break-all">
               {portfolioData.personal.email}
             </p>
           </motion.a>
@@ -88,11 +88,11 @@ export function Contact() {
             href={portfolioData.personal.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-6 rounded-lg border border-border bg-card/50 backdrop-blur hover:border-primary/50 transition-all text-center group"
+            className="p-6 rounded-none border-2 border-border bg-card hover:bg-accent transition-all text-center group shadow-[8px_8px_0px_var(--shadow-color)] hover:shadow-none hover:translate-x-2 hover:translate-y-2"
           >
-            <GitBranch className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
-            <h3 className="font-semibold mb-2">GitHub</h3>
-            <p className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            <GitBranch className="w-8 h-8 text-foreground mx-auto mb-3 group-hover:scale-110 transition-transform" />
+            <h3 className="font-bold mb-2">GitHub</h3>
+            <p className="text-sm text-muted-foreground">
               Lihat repositori saya
             </p>
           </motion.a>
@@ -106,11 +106,11 @@ export function Contact() {
             href={portfolioData.personal.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-6 rounded-lg border border-border bg-card/50 backdrop-blur hover:border-primary/50 transition-all text-center group"
+            className="p-6 rounded-none border-2 border-border bg-card hover:bg-accent transition-all text-center group shadow-[8px_8px_0px_var(--shadow-color)] hover:shadow-none hover:translate-x-2 hover:translate-y-2"
           >
-            <ExternalLink className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
-            <h3 className="font-semibold mb-2">LinkedIn</h3>
-            <p className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            <ExternalLink className="w-8 h-8 text-foreground mx-auto mb-3 group-hover:scale-110 transition-transform" />
+            <h3 className="font-bold mb-2">LinkedIn</h3>
+            <p className="text-sm text-muted-foreground">
               Terhubung dengan saya
             </p>
           </motion.a>
@@ -123,9 +123,9 @@ export function Contact() {
           transition={{ duration: 0.5 }}
           viewport={{ once: true, margin: '-100px' }}
           onSubmit={handleSubmit}
-          className="max-w-2xl mx-auto p-8 rounded-lg border border-border bg-card/30 backdrop-blur space-y-4"
+          className="max-w-2xl mx-auto p-8 rounded-none border-2 border-border bg-card space-y-4 shadow-[8px_8px_0px_var(--shadow-color)]"
         >
-          <h3 className="text-lg font-semibold text-center mb-2">Kirim Pesan</h3>
+          <h3 className="text-lg font-bold text-center mb-2">Kirim Pesan</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Input
               type="text"
@@ -151,11 +151,13 @@ export function Contact() {
             disabled={isSubmitting}
           />
 
-          {error && <p className="text-sm text-red-500 text-center">{error}</p>}
+          {error && (
+            <p className="text-sm text-red-500 font-bold text-center">{error}</p>
+          )}
           <Button
             type="submit"
-            className="w-full"
             size="lg"
+            className="w-full font-bold text-primary-foreground bg-primary border-2 border-border rounded-none shadow-[4px_4px_0px_var(--shadow-color)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all disabled:bg-muted disabled:shadow-none disabled:translate-y-0 disabled:translate-x-0"
             disabled={isSubmitting || submitted}
           >
             {isSubmitting
@@ -169,3 +171,4 @@ export function Contact() {
     </section>
   )
 }
+

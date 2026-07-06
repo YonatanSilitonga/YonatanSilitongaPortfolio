@@ -32,9 +32,9 @@ export function FeaturedProjectCard({
       className="group"
     >
       <Link href={`/projects/${id}`}>
-        <div className="relative overflow-hidden rounded-xl border border-border/50 bg-card/50 backdrop-blur transition-all duration-300 hover:border-primary/50 hover:shadow-lg cursor-pointer">
+        <div className="relative overflow-hidden bg-card border-2 border-border shadow-[8px_8px_0px_var(--shadow-color)] hover:shadow-none transition-all duration-200 hover:translate-x-2 hover:translate-y-2 cursor-pointer rounded-none">
           {/* Gambar Proyek / Placeholder */}
-          <div className="relative h-48 md:h-56 w-full overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+          <div className="relative h-48 md:h-56 w-full overflow-hidden bg-accent border-b-2 border-border flex items-center justify-center">
             {image ? (
               <img
                 src={image}
@@ -47,11 +47,10 @@ export function FeaturedProjectCard({
             ) : null}
             {/* Placeholder teks jika gambar tidak ada */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-6xl font-bold text-primary/10 select-none">
+              <span className="text-6xl font-bold text-foreground/10 select-none">
                 {title.charAt(0)}
               </span>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-60" />
           </div>
 
           {/* Konten */}
@@ -59,16 +58,16 @@ export function FeaturedProjectCard({
             {/* Badge Kategori & Judul */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+                <span className="px-3 py-1 text-xs font-bold bg-card text-foreground border-2 border-border shadow-[2px_2px_0px_var(--shadow-color)] rounded-none">
                   {category}
                 </span>
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="text-muted-foreground group-hover:text-primary transition-colors"
+                  className="text-foreground transition-colors"
                 >
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-5 h-5" />
                 </motion.div>
               </div>
               <h3 className="text-2xl md:text-3xl font-bold text-balance">{title}</h3>
@@ -84,7 +83,7 @@ export function FeaturedProjectCard({
               {technologies.slice(0, 5).map((tech) => (
                 <span
                   key={tech}
-                  className="px-2 py-1 text-xs bg-background/50 border border-border/50 rounded text-foreground/70 font-medium"
+                  className="px-2 py-1 text-xs bg-card border-2 border-border rounded-none font-medium"
                 >
                   {tech}
                 </span>
@@ -97,13 +96,16 @@ export function FeaturedProjectCard({
             </div>
 
             {/* CTA */}
-            <div className="pt-4 flex items-center gap-2 text-primary font-semibold text-sm group-hover:gap-3 transition-all duration-300">
+            <div className="pt-4">
+              <div className="inline-flex items-center gap-2 text-primary-foreground bg-primary font-bold text-sm border-2 border-border px-4 py-2 rounded-none group-hover:gap-3 transition-all duration-300 shadow-[2px_2px_0px_var(--shadow-color)]">
               <span>Lihat Studi Kasus</span>
-              <ArrowRight className="w-3 h-3" />
+                <ArrowRight className="w-4 h-4" />
             </div>
           </div>
+        </div>
         </div>
       </Link>
     </motion.div>
   )
 }
+

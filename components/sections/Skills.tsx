@@ -9,22 +9,22 @@ const skillsWithIcons = [
   {
     title: 'Rekayasa Backend',
     skills: ['Laravel', 'Golang', 'REST API', 'Autentikasi', 'Desain Database'],
-    icon: <Server className="w-6 h-6 text-primary" />,
+    icon: <Server className="w-6 h-6 text-foreground" />,
   },
   {
     title: 'Frontend & Mobile',
     skills: ['Flutter', 'React', 'JavaScript', 'Bootstrap', 'Desain Responsif'],
-    icon: <Smartphone className="w-6 h-6 text-primary" />,
+    icon: <Smartphone className="w-6 h-6 text-foreground" />,
   },
   {
     title: 'Ilmu Data & AI',
     skills: ['Python', 'Scikit-Learn', 'Isolation Forest', 'KMeans', 'Feature Engineering'],
-    icon: <Brain className="w-6 h-6 text-primary" />,
+    icon: <Brain className="w-6 h-6 text-foreground" />,
   },
   {
     title: 'Sistem & Alat',
     skills: ['MySQL', 'MongoDB', 'Docker', 'Git', 'Linux'],
-    icon: <Wrench className="w-6 h-6 text-primary" />,
+    icon: <Wrench className="w-6 h-6 text-foreground" />,
   },
 ]
 
@@ -65,7 +65,7 @@ export function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
           viewport={{ once: true, margin: '-100px' }}
-          className="mt-16 p-6 rounded-lg bg-primary/5 border border-primary/10 text-center"
+          className="mt-16 p-6 rounded-none bg-card border-2 border-border text-center shadow-[8px_8px_0px_var(--shadow-color)]"
         >
           <p className="text-muted-foreground">
             Keahlian dikelompokkan berdasarkan domain rekayasa, bukan teknologi individual —
@@ -76,3 +76,4 @@ export function Skills() {
     </section>
   )
 }
+

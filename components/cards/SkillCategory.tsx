@@ -16,10 +16,10 @@ export function SkillCategory({ title, skills, icon, index }: SkillCategoryProps
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true, margin: '-100px' }}
-      className="space-y-4 p-6 md:p-8 rounded-lg border border-border/50 bg-card/50 backdrop-blur hover:border-primary/30 transition-all"
+      className="space-y-4 p-6 md:p-8 bg-card border-2 border-border rounded-none shadow-[8px_8px_0px_var(--shadow-color)]"
     >
       {/* Header with Icon */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-4">
         <span className="text-3xl">{icon}</span>
         <h3 className="text-xl font-bold">{title}</h3>
       </div>
@@ -30,7 +30,7 @@ export function SkillCategory({ title, skills, icon, index }: SkillCategoryProps
           <motion.span
             key={skill}
             whileHover={{ scale: 1.05 }}
-            className="px-3 py-1 rounded-full text-sm font-medium bg-primary/10 text-primary border border-primary/20 transition-colors hover:bg-primary/20"
+            className="px-3 py-1 rounded-none text-sm font-bold bg-background text-foreground border-2 border-border transition-colors hover:bg-accent"
           >
             {skill}
           </motion.span>
@@ -39,3 +39,4 @@ export function SkillCategory({ title, skills, icon, index }: SkillCategoryProps
     </motion.div>
   )
 }
+

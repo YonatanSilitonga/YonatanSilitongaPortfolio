@@ -8,7 +8,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-border bg-card/30">
+    <footer className="border-t-2 border-border bg-card">
       <div className="max-w-6xl mx-auto px-4 md:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Branding */}
@@ -18,7 +18,7 @@ export function Footer() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-lg font-bold mb-2">YRPS</h3>
+            <h3 className="text-lg font-extrabold mb-2">YRPS</h3>
             <p className="text-sm text-muted-foreground">
               Mahasiswa Rekayasa Perangkat Lunak
             </p>
@@ -34,30 +34,30 @@ export function Footer() {
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-semibold mb-4">Navigasi</h4>
+            <h4 className="font-bold mb-4">Navigasi</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <a href="#home" className="hover:text-foreground transition-colors">
+                <a href="#home" className="hover:text-foreground hover:bg-accent p-1 transition-colors">
                   Beranda
                 </a>
               </li>
               <li>
-                <a href="#about" className="hover:text-foreground transition-colors">
+                <a href="#about" className="hover:text-foreground hover:bg-accent p-1 transition-colors">
                   Tentang Saya
                 </a>
               </li>
               <li>
-                <a href="#projects" className="hover:text-foreground transition-colors">
+                <a href="#projects" className="hover:text-foreground hover:bg-accent p-1 transition-colors">
                   Proyek
                 </a>
               </li>
               <li>
-                <a href="#skills" className="hover:text-foreground transition-colors">
+                <a href="#skills" className="hover:text-foreground hover:bg-accent p-1 transition-colors">
                   Keahlian
                 </a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-foreground transition-colors">
+                <a href="#contact" className="hover:text-foreground hover:bg-accent p-1 transition-colors">
                   Kontak
                 </a>
               </li>
@@ -71,13 +71,13 @@ export function Footer() {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-semibold mb-4">Terhubung</h4>
+            <h4 className="font-bold mb-4">Terhubung</h4>
             <div className="flex gap-4">
               <a
                 href={portfolioData.personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-foreground hover:bg-accent p-2 rounded-none transition-colors"
                 title="GitHub"
               >
                 <GitBranch className="w-5 h-5" />
@@ -86,14 +86,14 @@ export function Footer() {
                 href={portfolioData.personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-foreground hover:bg-accent p-2 rounded-none transition-colors"
                 title="LinkedIn"
               >
                 <ExternalLink className="w-5 h-5" />
               </a>
               <a
                 href={`mailto:${portfolioData.personal.email}`}
-                className="text-muted-foreground hover:text-primary transition-colors"
+                className="text-foreground hover:bg-accent p-2 rounded-none transition-colors"
                 title="Email"
               >
                 <Mail className="w-5 h-5" />
@@ -103,7 +103,7 @@ export function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-border my-8"></div>
+        <div className="border-t-2 border-border my-8"></div>
 
         {/* Hak Cipta */}
         <motion.div
@@ -117,7 +117,7 @@ export function Footer() {
             © {currentYear} {portfolioData.personal.name}. Semua hak dilindungi.
           </p>
           <p className="mt-2">
-            Dibuat dengan <span className="text-primary">♥</span> menggunakan
+            Dibuat dengan <span className="text-red-500">♥</span> menggunakan
             Next.js, React, dan Tailwind CSS
           </p>
         </motion.div>
@@ -125,3 +125,4 @@ export function Footer() {
     </footer>
   )
 }
+

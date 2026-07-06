@@ -29,10 +29,11 @@ export function RoleSwitcher() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -10 }}
         transition={{ duration: 0.5 }}
-        className="text-2xl md:text-3xl font-bold text-primary"
+        className="text-2xl md:text-3xl font-bold text-foreground"
       >
         {roles[currentRole]}
       </motion.div>
     </div>
   )
 }
+

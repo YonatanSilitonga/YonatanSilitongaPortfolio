@@ -73,8 +73,8 @@ export function Hero() {
               className="grid grid-cols-2 gap-4 pt-2"
             >
               {stats.map((stat) => (
-                <div key={stat.label} className="p-4 rounded-lg bg-card border border-border/50">
-                  <div className="text-2xl font-bold text-primary">{stat.value}</div>
+                <div key={stat.label} className="p-4 rounded-none bg-card border-2 border-border">
+                  <div className="text-2xl font-extrabold text-foreground">{stat.value}</div>
                   <div className="text-xs text-muted-foreground mt-1">
                     {stat.label}
                   </div>
@@ -90,13 +90,13 @@ export function Hero() {
               className="flex flex-wrap gap-3 pt-4"
             >
               <a href="#projects">
-                <Button size="lg" className="gap-2">
+                <Button size="lg" className="gap-2 font-bold text-primary-foreground bg-primary border-2 border-border rounded-none shadow-[4px_4px_0px_var(--shadow-color)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
                   Lihat Proyek
                   <ArrowRight className="w-4 h-4" />
                 </Button>
               </a>
               <a href="/resume.pdf" download>
-                <Button size="lg" variant="outline" className="gap-2">
+                <Button size="lg" variant="outline" className="gap-2 font-bold text-foreground bg-card border-2 border-border rounded-none shadow-[4px_4px_0px_var(--shadow-color)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
                   <Download className="w-4 h-4" />
                   Unduh CV
                 </Button>
@@ -106,7 +106,7 @@ export function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" variant="ghost" className="gap-2">
+                <Button size="lg" variant="ghost" className="gap-2 font-semibold text-foreground hover:bg-accent rounded-none">
                   <GitBranch className="w-4 h-4" />
                   GitHub
                 </Button>
@@ -116,7 +116,7 @@ export function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" variant="ghost" className="gap-2">
+                <Button size="lg" variant="ghost" className="gap-2 font-semibold text-foreground hover:bg-accent rounded-none">
                   <ExternalLink className="w-4 h-4" />
                   LinkedIn
                 </Button>
@@ -146,11 +146,11 @@ export function Hero() {
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            <div className="w-6 h-10 border border-primary/30 rounded-full flex items-center justify-center">
+            <div className="w-6 h-10 border-2 border-border rounded-full flex items-center justify-center">
               <motion.div
                 animate={{ y: [0, 4, 0] }}
                 transition={{ duration: 2, repeat: Infinity }}
-                className="w-1 h-2 rounded-full bg-primary"
+                className="w-1 h-2 rounded-full bg-foreground"
               />
             </div>
           </motion.div>
