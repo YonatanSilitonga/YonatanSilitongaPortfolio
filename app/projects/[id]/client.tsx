@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowLeft, GitBranch, ExternalLink, Star } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { NeoCard } from '@/components/ui/neo-card'
+import { SectionTitle } from '@/components/common/SectionTitle'
 import { portfolioData } from '@/lib/portfolio-data'
 
 const sectionVariants = {
@@ -11,18 +13,28 @@ const sectionVariants = {
   visible: { opacity: 1, y: 0 },
 }
 
+const tocSections = [
+  { id: 'problem', label: 'Permasalahan' },
+  { id: 'impact', label: 'Dampak' },
+  { id: 'architecture', label: 'Arsitektur' },
+  { id: 'challenges', label: 'Tantangan' },
+  { id: 'features', label: 'Fitur' },
+  { id: 'lessons', label: 'Pelajaran' },
+  { id: 'tech', label: 'Teknologi' },
+  { id: 'links', label: 'Tautan' },
+]
+
 export function ProjectCaseStudyClient({ project }: { project: typeof portfolioData.projects[0] }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Navigasi */}
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="sticky top-0 z-50 border-b-2 border-border bg-card"
       >
-        <div className="max-w-4xl mx-auto px-4 md:px-6 py-3">
+        <div className="max-w-5xl mx-auto px-4 md:px-6 py-3">
           <Link href="/#projects">
-            <Button variant="ghost" size="sm" className="gap-2 font-semibold hover:bg-accent border-2 border-transparent hover:border-border">
+            <Button variant="outline" size="sm" className="gap-2">
               <ArrowLeft className="w-4 h-4" />
               Kembali ke Portfolio
             </Button>
@@ -30,261 +42,249 @@ export function ProjectCaseStudyClient({ project }: { project: typeof portfolioD
         </div>
       </motion.nav>
 
-      {/* Banner Hero - Menggunakan Variabel Tema */}
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative overflow-hidden bg-primary border-b-2 border-border"
+        className="bg-primary border-b-2 border-border"
       >
-        <div className="relative max-w-4xl mx-auto px-4 md:px-6 py-20 md:py-28 space-y-6 text-primary-foreground">
-          <div className="space-y-4">
-            <span className="px-3 py-1 rounded-md text-sm font-bold bg-card text-foreground border-2 border-border shadow-[3px_3px_0px_var(--shadow-color)]">
-              {project.category}
-            </span>
-            <h1 className="text-5xl md:text-6xl font-bold">
-              {project.title}
-            </h1>
-            <p className="text-lg text-primary-foreground/80 max-w-2xl">
-              {project.description}
-            </p>
-          </div>
+        <div className="max-w-5xl mx-auto px-4 md:px-6 py-16 md:py-24 space-y-4 text-primary-foreground">
+          <span className="inline-block px-3 py-1 text-sm font-extrabold bg-card text-foreground border-2 border-border neo-shadow-sm">
+            {project.category}
+          </span>
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight">
+            {project.title}
+          </h1>
+          <p className="text-base md:text-lg opacity-80 max-w-2xl font-medium">
+            {project.description}
+          </p>
         </div>
       </motion.section>
 
-      {/* Konten Utama */}
-      <div className="max-w-4xl mx-auto px-4 md:px-6 py-16 md:py-24 space-y-20">
-        {/* Seksi Masalah */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          variants={sectionVariants}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="space-y-6"
-        >
-          <div className="space-y-2">
-            <h2 className="text-3xl md:text-4xl font-bold">Permasalahan</h2>
-            <div className="w-16 h-2 bg-foreground" />
-          </div>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            {project.problem}
-          </p>
-          <p className="text-base text-muted-foreground leading-relaxed border-l-4 border-border pl-6">
-            <span className="font-bold text-foreground">Mengapa ini penting: </span>
-            {project.whyItMatters}
-          </p>
-        </motion.section>
-
-        {/* Seksi Dampak */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          variants={sectionVariants}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="space-y-4 p-8 rounded-md bg-card border-2 border-border shadow-[8px_8px_0px_var(--shadow-color)]"
-        >
-          <h3 className="text-2xl font-bold">Dampak yang Dihasilkan</h3>
-          <p className="text-lg font-semibold text-foreground">{project.impact}</p>
-        </motion.section>
-
-        {/* Seksi Arsitektur */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          variants={sectionVariants}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="space-y-6"
-        >
-          <div className="space-y-2">
-            <h2 className="text-3xl md:text-4xl font-bold">Arsitektur Sistem</h2>
-            <div className="w-16 h-2 bg-foreground" />
-          </div>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            {project.architecture}
-          </p>
-          <div className="space-y-3">
-            <h4 className="font-semibold text-lg">Keputusan Teknis</h4>
-            <ul className="space-y-2">
-              {project.techDecisions.map((decision, idx) => (
-                <li key={idx} className="flex gap-3 text-muted-foreground">
-                  <span className="text-foreground font-bold flex-shrink-0">•</span>
-                  <span>{decision}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </motion.section>
-
-        {/* Seksi Tantangan & Solusi */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          variants={sectionVariants}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="space-y-6"
-        >
-          <div className="space-y-2">
-            <h2 className="text-3xl md:text-4xl font-bold">Tantangan & Solusi</h2>
-            <div className="w-16 h-2 bg-foreground" />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-4 p-6 rounded-md bg-card border-2 border-border">
-              <h4 className="font-semibold text-lg">Tantangan yang Dihadapi</h4>
-              <ul className="space-y-2">
-                {project.challenges.map((challenge, idx) => (
-                  <li key={idx} className="flex gap-3 text-muted-foreground">
-                    <span className="text-red-500 font-bold flex-shrink-0">✕</span>
-                    <span>{challenge}</span>
-                  </li>
-                ))}
-              </ul>
+      <div className="max-w-5xl mx-auto px-4 md:px-6 py-12 md:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
+          {/* Sidebar TOC */}
+          <aside className="lg:col-span-1">
+            <div className="lg:sticky lg:top-20">
+              <NeoCard shadow="md" className="p-4">
+                <p className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground mb-3">
+                  Daftar Isi
+                </p>
+                <nav className="space-y-1">
+                  {tocSections.map((item) => (
+                    <a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      className="block px-2 py-1.5 text-sm font-bold text-muted-foreground hover:text-foreground hover:bg-accent border-l-2 border-transparent hover:border-border transition-colors"
+                    >
+                      {item.label}
+                    </a>
+                  ))}
+                </nav>
+              </NeoCard>
             </div>
+          </aside>
 
-            <div className="space-y-4 p-6 rounded-md bg-card border-2 border-border">
-              <h4 className="font-semibold text-lg">Solusi yang Diterapkan</h4>
-              <ul className="space-y-2">
-                {project.solutions.map((solution, idx) => (
-                  <li key={idx} className="flex gap-3 text-muted-foreground">
-                    <span className="text-green-500 font-bold flex-shrink-0">✓</span>
-                    <span>{solution}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Seksi Fitur Utama */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          variants={sectionVariants}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="space-y-6"
-        >
-          <div className="space-y-2">
-            <h2 className="text-3xl md:text-4xl font-bold">Fitur Utama</h2>
-            <div className="w-16 h-2 bg-foreground" />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {project.features.map((feature, idx) => (
-              <div
-                key={idx}
-                className="p-4 rounded-md border-2 border-border bg-card flex gap-3 items-start"
-              >
-                <Star className="w-5 h-5 text-primary fill-primary flex-shrink-0 mt-0.5" />
-                <span className="text-muted-foreground">{feature}</span>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Seksi Pelajaran */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          variants={sectionVariants}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="space-y-6"
-        >
-          <div className="space-y-2">
-            <h2 className="text-3xl md:text-4xl font-bold">Pelajaran yang Dipetik</h2>
-            <div className="w-16 h-2 bg-foreground" />
-          </div>
-          <div className="space-y-3">
-            {project.lessonsLearned.map((lesson, idx) => (
-              <div key={idx} className="p-4 rounded-md bg-card border-2 border-border">
-                <p className="text-muted-foreground">{lesson}</p>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Seksi Teknologi */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          variants={sectionVariants}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="space-y-6"
-        >
-          <div className="space-y-2">
-            <h2 className="text-3xl md:text-4xl font-bold">Tumpukan Teknologi</h2>
-            <div className="w-16 h-2 bg-foreground" />
-          </div>
-          <div className="flex flex-wrap gap-3">
-            {project.technologies.map((tech) => (
-              <span
-                key={tech}
-                className="px-4 py-2 rounded-md bg-card border-2 border-border text-sm font-bold text-foreground shadow-[3px_3px_0px_var(--shadow-color)]"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Tautan */}
-        <motion.section
-          initial="hidden"
-          whileInView="visible"
-          variants={sectionVariants}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, margin: '-100px' }}
-          className="space-y-6 pt-12 border-t-2 border-border"
-        >
-          <h3 className="text-2xl font-bold">Jelajahi Kode</h3>
-          <div className="flex flex-col md:flex-row gap-4">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full md:w-auto"
+          {/* Main content */}
+          <div className="lg:col-span-3 space-y-16">
+            <motion.section
+              id="problem"
+              initial="hidden"
+              whileInView="visible"
+              variants={sectionVariants}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-100px' }}
+              className="space-y-4"
             >
-              <Button size="lg" className="gap-2 w-full font-bold text-primary-foreground bg-primary border-2 border-border rounded-md shadow-[4px_4px_0px_var(--shadow-color)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
-                <GitBranch className="w-4 h-4" />
-                Lihat di GitHub
-              </Button>
-            </a>
-            {project.demo && (
-              <a
-                href={project.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full md:w-auto"
-              >
-                <Button size="lg" variant="outline" className="gap-2 w-full font-bold text-foreground bg-card border-2 border-border rounded-md shadow-[4px_4px_0px_var(--shadow-color)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
-                  <ExternalLink className="w-4 h-4" />
-                  Lihat Demo
-                </Button>
-              </a>
-            )}
-          </div>
-        </motion.section>
+              <SectionTitle title="Permasalahan" centered={false} number="01" />
+              <p className="text-base text-muted-foreground leading-relaxed">
+                {project.problem}
+              </p>
+              <NeoCard shadow="sm" className="p-4 border-l-4 border-l-primary">
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  <span className="font-extrabold text-foreground">Mengapa ini penting: </span>
+                  {project.whyItMatters}
+                </p>
+              </NeoCard>
+            </motion.section>
 
-        {/* Kembali ke Portfolio */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          variants={sectionVariants}
-          transition={{ duration: 0.6 }}
-          className="pt-12 border-t-2 border-border"
-        >
-          <Link href="/#projects">
-            <Button variant="ghost" className="gap-2 font-semibold hover:bg-accent border-2 border-transparent hover:border-border">
-              <ArrowLeft className="w-4 h-4" />
-              Kembali ke Portfolio
-            </Button>
-          </Link>
-        </motion.div>
+            <motion.section
+              id="impact"
+              initial="hidden"
+              whileInView="visible"
+              variants={sectionVariants}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-100px' }}
+            >
+              <NeoCard shadow="lg" className="p-6 space-y-3">
+                <SectionTitle title="Dampak yang Dihasilkan" centered={false} number="02" />
+                <p className="text-lg font-extrabold">{project.impact}</p>
+              </NeoCard>
+            </motion.section>
+
+            <motion.section
+              id="architecture"
+              initial="hidden"
+              whileInView="visible"
+              variants={sectionVariants}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-100px' }}
+              className="space-y-4"
+            >
+              <SectionTitle title="Arsitektur Sistem" centered={false} number="03" />
+              <p className="text-base text-muted-foreground leading-relaxed">
+                {project.architecture}
+              </p>
+              <NeoCard shadow="sm" className="p-5 space-y-3">
+                <h4 className="font-extrabold">Keputusan Teknis</h4>
+                <ul className="space-y-2">
+                  {project.techDecisions.map((decision, idx) => (
+                    <li key={idx} className="flex gap-3 text-sm text-muted-foreground">
+                      <span className="font-extrabold text-foreground shrink-0">•</span>
+                      <span>{decision}</span>
+                    </li>
+                  ))}
+                </ul>
+              </NeoCard>
+            </motion.section>
+
+            <motion.section
+              id="challenges"
+              initial="hidden"
+              whileInView="visible"
+              variants={sectionVariants}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-100px' }}
+              className="space-y-4"
+            >
+              <SectionTitle title="Tantangan & Solusi" centered={false} number="04" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <NeoCard shadow="md" className="p-5 space-y-3">
+                  <h4 className="font-extrabold">Tantangan</h4>
+                  <ul className="space-y-2">
+                    {project.challenges.map((challenge, idx) => (
+                      <li key={idx} className="flex gap-2 text-sm text-muted-foreground">
+                        <span className="text-destructive font-extrabold shrink-0">✕</span>
+                        <span>{challenge}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </NeoCard>
+                <NeoCard shadow="md" className="p-5 space-y-3">
+                  <h4 className="font-extrabold">Solusi</h4>
+                  <ul className="space-y-2">
+                    {project.solutions.map((solution, idx) => (
+                      <li key={idx} className="flex gap-2 text-sm text-muted-foreground">
+                        <span className="text-primary font-extrabold shrink-0">✓</span>
+                        <span>{solution}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </NeoCard>
+              </div>
+            </motion.section>
+
+            <motion.section
+              id="features"
+              initial="hidden"
+              whileInView="visible"
+              variants={sectionVariants}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-100px' }}
+              className="space-y-4"
+            >
+              <SectionTitle title="Fitur Utama" centered={false} number="05" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {project.features.map((feature, idx) => (
+                  <NeoCard key={idx} shadow="sm" className="p-4 flex gap-3 items-start">
+                    <Star className="w-4 h-4 text-primary fill-primary shrink-0 mt-0.5" />
+                    <span className="text-sm text-muted-foreground">{feature}</span>
+                  </NeoCard>
+                ))}
+              </div>
+            </motion.section>
+
+            <motion.section
+              id="lessons"
+              initial="hidden"
+              whileInView="visible"
+              variants={sectionVariants}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-100px' }}
+              className="space-y-4"
+            >
+              <SectionTitle title="Pelajaran yang Dipetik" centered={false} number="06" />
+              <div className="space-y-3">
+                {project.lessonsLearned.map((lesson, idx) => (
+                  <NeoCard key={idx} shadow="sm" className="p-4">
+                    <p className="text-sm text-muted-foreground">{lesson}</p>
+                  </NeoCard>
+                ))}
+              </div>
+            </motion.section>
+
+            <motion.section
+              id="tech"
+              initial="hidden"
+              whileInView="visible"
+              variants={sectionVariants}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-100px' }}
+              className="space-y-4"
+            >
+              <SectionTitle title="Tumpukan Teknologi" centered={false} number="07" />
+              <NeoCard shadow="md" className="p-5">
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 text-xs font-extrabold bg-background border-2 border-border neo-shadow-sm"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </NeoCard>
+            </motion.section>
+
+            <motion.section
+              id="links"
+              initial="hidden"
+              whileInView="visible"
+              variants={sectionVariants}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: '-100px' }}
+              className="space-y-4 pt-8 border-t-2 border-border"
+            >
+              <SectionTitle title="Jelajahi Kode" centered={false} number="08" />
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1">
+                  <Button size="lg" className="gap-2 w-full">
+                    <GitBranch className="w-4 h-4" />
+                    Lihat di GitHub
+                  </Button>
+                </a>
+                {project.demo && (
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button size="lg" variant="outline" className="gap-2 w-full">
+                      <ExternalLink className="w-4 h-4" />
+                      Lihat Demo
+                    </Button>
+                  </a>
+                )}
+              </div>
+            </motion.section>
+
+            <div className="pt-8 border-t-2 border-border">
+              <Link href="/#projects">
+                <Button variant="outline" className="gap-2">
+                  <ArrowLeft className="w-4 h-4" />
+                  Kembali ke Portfolio
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )

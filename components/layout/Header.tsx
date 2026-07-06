@@ -6,7 +6,6 @@ import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import dynamic from 'next/dynamic'
 
-// Impor dinamis ThemeToggle untuk mencegah Hydration Mismatch
 const ThemeToggle = dynamic(() => import('./ThemeToggle').then((mod) => mod.ThemeToggle), {
   ssr: false,
 })
@@ -39,24 +38,23 @@ export function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <nav className="max-w-6xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
-        <motion.div
+      <nav className="max-w-6xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between gap-4">
+        <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
-          className="font-extrabold text-xl cursor-pointer"
+          className="px-3 py-1.5 font-extrabold text-sm bg-primary text-primary-foreground border-2 border-border neo-shadow-sm neo-press cursor-pointer"
           onClick={() => handleNavClick('#home')}
         >
           YRPS
-        </motion.div>
+        </motion.button>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1.5 flex-wrap justify-center">
           {navLinks.map((link) => (
             <button
               key={link.name}
               onClick={() => handleNavClick(link.href)}
-              className="px-3 py-2 rounded-none text-sm font-semibold text-foreground hover:bg-accent transition-colors"
+              className="px-2.5 py-1.5 text-xs font-bold text-foreground bg-card border-2 border-border neo-shadow-sm neo-press transition-all"
             >
               {link.name}
             </button>
@@ -65,12 +63,10 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-
-          {/* Mobile Menu Button */}
           <Button
-            variant="ghost"
+            variant="outline"
             size="icon"
-            className="md:hidden border-2 border-transparent hover:border-border hover:bg-accent rounded-none"
+            className="lg:hidden neo-shadow-sm"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Buka menu"
           >
@@ -79,18 +75,17 @@ export function Header() {
         </div>
       </nav>
 
-      {/* Mobile Navigation */}
       <motion.div
         initial={false}
         animate={isOpen ? { height: 'auto' } : { height: 0 }}
         transition={{ duration: 0.3 }}
-        className="overflow-hidden md:hidden border-t-2 border-border bg-card"
+        className="overflow-hidden lg:hidden border-t-2 border-border bg-card"
       >
-        <div className="px-4 py-4 space-y-1">
+        <div className="px-4 py-4 space-y-2">
           {navLinks.map((link) => (
             <button
               key={link.name}
-              className="w-full text-left px-3 py-2 rounded-none text-sm font-semibold text-foreground hover:bg-accent transition-colors"
+              className="w-full text-left px-4 py-3 text-sm font-bold text-foreground bg-background border-2 border-border neo-shadow-sm neo-press"
               onClick={() => handleNavClick(link.href)}
             >
               {link.name}

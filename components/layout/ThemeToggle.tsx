@@ -16,26 +16,23 @@ export function ThemeToggle() {
     setTheme(theme === 'dark' ? 'light' : 'dark')
   }
   if (!mounted) {
-    // Jangan render apapun di server, dan tampilkan placeholder
-    // untuk mencegah layout shift saat komponen dimuat.
-    return <div className="w-9 h-9" />
+    return <div className="w-9 h-9 border-2 border-transparent" />
   }
 
   return (
     <Button
-      variant="ghost"
+      variant="outline"
       size="icon"
       onClick={toggleTheme}
       aria-label="Ganti tema"
       title={theme === 'dark' ? 'Beralih ke mode terang' : 'Beralih ke mode gelap'}
-      className="rounded-full"
+      className="neo-shadow-sm"
     >
       {theme === 'dark' ? (
-        <Sun className="w-5 h-5 text-yellow-400" />
+        <Sun className="w-5 h-5 text-primary" />
       ) : (
         <Moon className="w-5 h-5" />
       )}
     </Button>
   )
 }
-

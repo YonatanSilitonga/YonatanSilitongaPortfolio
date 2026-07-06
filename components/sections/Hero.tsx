@@ -1,8 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { GitBranch, Download, ExternalLink, ArrowRight } from 'lucide-react'
+import { GitBranch, Download, ExternalLink, ArrowRight, ArrowDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { NeoCard } from '@/components/ui/neo-card'
 import { ProfileImage } from '@/components/common/ProfileImage'
 import { RoleSwitcher } from '@/components/common/RoleSwitcher'
 import { portfolioData } from '@/lib/portfolio-data'
@@ -20,140 +21,131 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center px-4 md:px-6 pt-20 pb-20"
+      className="relative min-h-screen flex items-center justify-center px-4 md:px-6 pt-24 pb-20"
     >
       <div className="max-w-6xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center"
+          className="grid grid-cols-4 md:grid-cols-6 gap-4"
         >
-          {/* Kolom Kiri - Konten */}
-          <div className="space-y-8">
-            {/* Nama dan Judul */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="space-y-3"
-            >
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                {portfolioData.personal.name}
-              </h1>
-              <p className="text-lg text-muted-foreground">
-                Mahasiswa Rekayasa Perangkat Lunak Terapan di Institut Teknologi Del
-              </p>
-            </motion.div>
+          {/* Nama */}
+          <NeoCard
+            shadow="lg"
+            className="col-span-4 md:col-span-4 p-6 md:p-8 flex flex-col justify-center"
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-none tracking-tight">
+              {portfolioData.personal.name}
+            </h1>
+            <p className="text-sm md:text-base text-muted-foreground mt-3 font-medium">
+              Mahasiswa Rekayasa Perangkat Lunak Terapan — Institut Teknologi Del
+            </p>
+          </NeoCard>
 
-            {/* Role Switcher */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <RoleSwitcher />
-            </motion.div>
+          {/* Status badge */}
+          <NeoCard
+            accent
+            shadow="lg"
+            className="col-span-2 md:col-span-2 p-4 md:p-6 flex flex-col justify-center items-center text-center"
+          >
+            <span className="text-xs font-bold uppercase tracking-widest opacity-80">Status</span>
+            <p className="text-sm md:text-base font-extrabold mt-2 leading-tight">
+              Open to Internship
+            </p>
+          </NeoCard>
 
-            {/* Tagline */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-lg text-balance leading-relaxed text-foreground"
-            >
-              {TAGLINE}
-            </motion.p>
+          {/* Role switcher */}
+          <NeoCard
+            shadow="md"
+            className="col-span-4 md:col-span-3 p-5 md:p-6 flex items-center"
+          >
+            <RoleSwitcher />
+          </NeoCard>
 
-            {/* Stats Grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="grid grid-cols-2 gap-4 pt-2"
-            >
-              {stats.map((stat) => (
-                <div key={stat.label} className="p-4 rounded-none bg-card border-2 border-border">
-                  <div className="text-2xl font-extrabold text-foreground">{stat.value}</div>
-                  <div className="text-xs text-muted-foreground mt-1">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Tombol CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-wrap gap-3 pt-4"
-            >
-              <a href="#projects">
-                <Button size="lg" className="gap-2 font-bold text-primary-foreground bg-primary border-2 border-border rounded-none shadow-[4px_4px_0px_var(--shadow-color)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
-                  Lihat Proyek
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
-              </a>
-              <a href="/resume.pdf" download>
-                <Button size="lg" variant="outline" className="gap-2 font-bold text-foreground bg-card border-2 border-border rounded-none shadow-[4px_4px_0px_var(--shadow-color)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
-                  <Download className="w-4 h-4" />
-                  Unduh CV
-                </Button>
-              </a>
-              <a
-                href={portfolioData.personal.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button size="lg" variant="ghost" className="gap-2 font-semibold text-foreground hover:bg-accent rounded-none">
-                  <GitBranch className="w-4 h-4" />
-                  GitHub
-                </Button>
-              </a>
-              <a
-                href={portfolioData.personal.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button size="lg" variant="ghost" className="gap-2 font-semibold text-foreground hover:bg-accent rounded-none">
-                  <ExternalLink className="w-4 h-4" />
-                  LinkedIn
-                </Button>
-              </a>
-            </motion.div>
+          {/* Foto profil */}
+          <div className="col-span-4 md:col-span-3 flex justify-center md:justify-end items-center">
+            <ProfileImage className="scale-90 md:scale-100" />
           </div>
 
-          {/* Kolom Kanan - Foto Profil */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex justify-center md:justify-end"
+          {/* Tagline */}
+          <NeoCard
+            shadow="sm"
+            className="col-span-full p-4 md:p-5"
           >
-            <ProfileImage />
+            <p className="text-base md:text-lg font-medium text-balance leading-relaxed">
+              {TAGLINE}
+            </p>
+          </NeoCard>
+
+          {/* Stats */}
+          {stats.map((stat, idx) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 + idx * 0.1 }}
+              className="col-span-2 md:col-span-1"
+            >
+              <NeoCard shadow="sm" className="p-3 md:p-4 text-center h-full">
+                <div className="text-xl md:text-2xl font-extrabold">{stat.value}</div>
+                <div className="text-[10px] md:text-xs text-muted-foreground mt-1 font-bold uppercase">
+                  {stat.label}
+                </div>
+              </NeoCard>
+            </motion.div>
+          ))}
+
+          {/* CTA row */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="col-span-full flex flex-wrap gap-3 pt-2"
+          >
+            <a href="#projects">
+              <Button size="lg" className="gap-2">
+                Lihat Proyek
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </a>
+            <a href="/resume.pdf" download>
+              <Button size="lg" variant="outline" className="gap-2">
+                <Download className="w-4 h-4" />
+                Unduh CV
+              </Button>
+            </a>
+            <a href={portfolioData.personal.github} target="_blank" rel="noopener noreferrer">
+              <Button size="lg" variant="ghost" className="gap-2">
+                <GitBranch className="w-4 h-4" />
+                GitHub
+              </Button>
+            </a>
+            <a href={portfolioData.personal.linkedin} target="_blank" rel="noopener noreferrer">
+              <Button size="lg" variant="ghost" className="gap-2">
+                <ExternalLink className="w-4 h-4" />
+                LinkedIn
+              </Button>
+            </a>
           </motion.div>
         </motion.div>
 
-        {/* Indikator Scroll */}
+        {/* Scroll indicator brutal */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className="flex justify-center mt-12"
         >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
+          <motion.a
+            href="#about"
+            animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
+            className="inline-flex items-center justify-center w-10 h-10 border-2 border-border bg-card neo-shadow-sm neo-press"
+            aria-label="Scroll ke bawah"
           >
-            <div className="w-6 h-10 border-2 border-border rounded-full flex items-center justify-center">
-              <motion.div
-                animate={{ y: [0, 4, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-1 h-2 rounded-full bg-foreground"
-              />
-            </div>
-          </motion.div>
+            <ArrowDown className="w-5 h-5" />
+          </motion.a>
         </motion.div>
       </div>
     </section>

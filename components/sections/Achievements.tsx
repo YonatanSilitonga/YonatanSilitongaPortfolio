@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Award, Trophy } from 'lucide-react'
 import { SectionTitle } from '@/components/common/SectionTitle'
+import { NeoCard } from '@/components/ui/neo-card'
 import { portfolioData } from '@/lib/portfolio-data'
 
 const achievementIcons: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -10,26 +11,30 @@ const achievementIcons: Record<string, React.ComponentType<{ className?: string 
   trophy: Trophy,
 }
 
-export function Achievements() {
+interface AchievementsProps {
+  embedded?: boolean
+}
+
+export function Achievements({ embedded = false }: AchievementsProps) {
   return (
-    <section id="achievements" className="py-20 md:py-32 px-4 md:px-6 bg-card/20">
-      <div className="max-w-6xl mx-auto">
-        {/* Judul Section */}
+    <div id="achievements" className={embedded ? '' : 'py-20 md:py-32 px-4 md:px-6'}>
+      <div className={embedded ? '' : 'max-w-6xl mx-auto'}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true, margin: '-100px' }}
-          className="mb-16 md:mb-20"
+          className="mb-8"
         >
           <SectionTitle
+            number={embedded ? undefined : '05'}
             title="Prestasi & Penghargaan"
             subtitle="Pengakuan atas kerja keras dan dedikasi"
+            centered={!embedded}
           />
         </motion.div>
 
-        {/* Grid Prestasi */}
-        <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+        <div className="grid grid-cols-1 gap-4">
           {portfolioData.achievements.map((achievement, idx) => {
             const IconComponent = achievementIcons[achievement.icon] || Award
             return (
@@ -39,26 +44,32 @@ export function Achievements() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 viewport={{ once: true, margin: '-100px' }}
-                className="group p-6 rounded-lg border border-border/50 bg-card/50 backdrop-blur hover:border-primary/40 hover:shadow-lg transition-all w-full md:w-80"
               >
-                {/* Ikon */}
-                <div className="mb-4 text-primary group-hover:scale-110 transition-transform">
-                  <IconComponent className="w-10 h-10" />
-                </div>
-
-                {/* Konten */}
-                <div className="space-y-2">
-                  <h3 className="font-bold text-lg leading-tight">{achievement.title}</h3>
-                  <p className="text-sm text-primary font-semibold">{achievement.year}</p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {achievement.description}
-                  </p>
-                </div>
+                <NeoCard shadow="md" press className="p-5">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-primary text-primary-foreground border-2 border-border neo-shadow-sm shrink-0">
+                      <IconComponent className="w-6 h-6" />
+                    </div>
+                    <div className="space-y-1.5 min-w-0">
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="font-extrabold text-base leading-tight">
+                          {achievement.title}
+                        </h3>
+                        <span className="text-xs font-bold bg-background border-2 border-border px-2 py-0.5 shrink-0">
+                          {achievement.year}
+                        </span>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {achievement.description}
+                      </p>
+                    </div>
+                  </div>
+                </NeoCard>
               </motion.div>
             )
           })}
         </div>
       </div>
-    </section>
+    </div>
   )
 }

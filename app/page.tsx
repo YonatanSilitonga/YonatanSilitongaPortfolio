@@ -20,8 +20,12 @@ export default function Page() {
       <About />
       <FeaturedProjects />
       <Skills />
-      <Experience />
-      <Achievements />
+      <section className="py-20 md:py-32 px-4 md:px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+          <Experience embedded />
+          <Achievements embedded />
+        </div>
+      </section>
       <Contact />
       <Footer />
     </main>

@@ -2,127 +2,119 @@
 
 import { motion } from 'framer-motion'
 import { GitBranch, ExternalLink, Mail } from 'lucide-react'
+import { NeoCard } from '@/components/ui/neo-card'
 import { portfolioData } from '@/lib/portfolio-data'
+
+const navItems = [
+  { label: 'Beranda', href: '#home' },
+  { label: 'Tentang', href: '#about' },
+  { label: 'Proyek', href: '#projects' },
+  { label: 'Keahlian', href: '#skills' },
+  { label: 'Kontak', href: '#contact' },
+]
+
+const socialLinks = [
+  { icon: GitBranch, href: portfolioData.personal.github, title: 'GitHub' },
+  { icon: ExternalLink, href: portfolioData.personal.linkedin, title: 'LinkedIn' },
+  { icon: Mail, href: `mailto:${portfolioData.personal.email}`, title: 'Email' },
+]
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
     <footer className="border-t-2 border-border bg-card">
+      <div className="border-b-2 border-border bg-primary py-2 overflow-hidden">
+        <p className="text-center text-xs font-extrabold text-primary-foreground uppercase tracking-[0.3em]">
+          YRPS — Software Engineering — Institut Teknologi Del
+        </p>
+      </div>
+
       <div className="max-w-6xl mx-auto px-4 md:px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          {/* Branding */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-lg font-extrabold mb-2">YRPS</h3>
-            <p className="text-sm text-muted-foreground">
-              Mahasiswa Rekayasa Perangkat Lunak
-            </p>
-            <p className="text-xs text-muted-foreground mt-1">
-              Institut Teknologi Del
-            </p>
+            <NeoCard shadow="sm" className="p-5 h-full">
+              <span className="inline-block px-2 py-1 text-sm font-extrabold bg-primary text-primary-foreground border-2 border-border mb-3">
+                YRPS
+              </span>
+              <p className="text-sm text-muted-foreground font-medium">
+                Mahasiswa Rekayasa Perangkat Lunak
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Institut Teknologi Del
+              </p>
+            </NeoCard>
           </motion.div>
 
-          {/* Tautan Cepat */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-bold mb-4">Navigasi</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <a href="#home" className="hover:text-foreground hover:bg-accent p-1 transition-colors">
-                  Beranda
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="hover:text-foreground hover:bg-accent p-1 transition-colors">
-                  Tentang Saya
-                </a>
-              </li>
-              <li>
-                <a href="#projects" className="hover:text-foreground hover:bg-accent p-1 transition-colors">
-                  Proyek
-                </a>
-              </li>
-              <li>
-                <a href="#skills" className="hover:text-foreground hover:bg-accent p-1 transition-colors">
-                  Keahlian
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="hover:text-foreground hover:bg-accent p-1 transition-colors">
-                  Kontak
-                </a>
-              </li>
-            </ul>
+            <NeoCard shadow="sm" className="p-5 h-full">
+              <h4 className="font-extrabold text-sm uppercase mb-3">Navigasi</h4>
+              <ul className="space-y-1.5">
+                {navItems.map((item) => (
+                  <li key={item.href}>
+                    <a
+                      href={item.href}
+                      className="text-sm text-muted-foreground font-bold hover:text-foreground hover:underline"
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </NeoCard>
           </motion.div>
 
-          {/* Tautan Sosial */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h4 className="font-bold mb-4">Terhubung</h4>
-            <div className="flex gap-4">
-              <a
-                href={portfolioData.personal.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground hover:bg-accent p-2 rounded-none transition-colors"
-                title="GitHub"
-              >
-                <GitBranch className="w-5 h-5" />
-              </a>
-              <a
-                href={portfolioData.personal.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground hover:bg-accent p-2 rounded-none transition-colors"
-                title="LinkedIn"
-              >
-                <ExternalLink className="w-5 h-5" />
-              </a>
-              <a
-                href={`mailto:${portfolioData.personal.email}`}
-                className="text-foreground hover:bg-accent p-2 rounded-none transition-colors"
-                title="Email"
-              >
-                <Mail className="w-5 h-5" />
-              </a>
-            </div>
+            <NeoCard shadow="sm" className="p-5 h-full">
+              <h4 className="font-extrabold text-sm uppercase mb-3">Terhubung</h4>
+              <div className="flex gap-3">
+                {socialLinks.map(({ icon: Icon, href, title }) => (
+                  <a
+                    key={title}
+                    href={href}
+                    target={title !== 'Email' ? '_blank' : undefined}
+                    rel={title !== 'Email' ? 'noopener noreferrer' : undefined}
+                    title={title}
+                    className="inline-flex items-center justify-center w-10 h-10 border-2 border-border bg-background neo-shadow-sm neo-press"
+                  >
+                    <Icon className="w-4 h-4" />
+                  </a>
+                ))}
+              </div>
+            </NeoCard>
           </motion.div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t-2 border-border my-8"></div>
-
-        {/* Hak Cipta */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center text-sm text-muted-foreground"
-        >
-          <p>
-            © {currentYear} {portfolioData.personal.name}. Semua hak dilindungi.
-          </p>
-          <p className="mt-2">
-            Dibuat dengan <span className="text-red-500">♥</span> menggunakan
-            Next.js, React, dan Tailwind CSS
-          </p>
-        </motion.div>
+        <div className="border-t-2 border-border pt-6">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center text-sm text-muted-foreground font-medium"
+          >
+            <p>© {currentYear} {portfolioData.personal.name}. Semua hak dilindungi.</p>
+            <p className="mt-1 text-xs">
+              Dibuat dengan Next.js, React, dan Tailwind CSS
+            </p>
+          </motion.div>
+        </div>
       </div>
     </footer>
   )
 }
-
