@@ -353,7 +353,7 @@
   animation: bounce-slow 3s ease-in-out infinite;
 }
 .animate-trail-follow {
-  transition: left 0.1s, top 0.1s;
+  transition: left 0.02s, top 0.02s;
   animation: trail-pulse 0.8s ease-in-out infinite;
 }
 
