@@ -19,9 +19,9 @@ export function SkillCategory({ title, skills, icon, index }: SkillCategoryProps
       viewport={{ once: true, margin: '-100px' }}
       className="h-full"
     >
-      <NeoCard shadow="md" className="overflow-hidden h-full flex flex-col">
+      <NeoCard shadow="md" className="group overflow-hidden h-full flex flex-col hover:animate-shake-quick">
         <div className="flex items-center gap-3 px-4 py-3 bg-primary text-primary-foreground border-b-2 border-border">
-          <span className="text-xl">{icon}</span>
+          <span className="text-xl group-hover:animate-spin-slow">{icon}</span>
           <h3 className="text-sm font-extrabold uppercase tracking-wide">{title}</h3>
         </div>
         <div className="flex flex-wrap gap-2 p-4 flex-1">

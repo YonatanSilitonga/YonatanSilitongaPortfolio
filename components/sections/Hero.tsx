@@ -23,6 +23,13 @@ export function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center px-4 md:px-6 pt-24 pb-20"
     >
+      {/* Floating Background Shapes */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute top-20 left-10 w-32 h-32 border-4 border-primary bg-primary/20 animate-float-1" />
+        <div className="absolute top-40 right-20 w-24 h-24 rounded-full border-4 border-foreground bg-secondary/20 animate-float-2" />
+        <div className="absolute bottom-32 left-1/4 w-28 h-28 border-4 border-primary bg-primary/10 rotate-45 animate-float-3" />
+      </div>
+
       <div className="max-w-6xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -137,15 +144,13 @@ export function Hero() {
           transition={{ delay: 1, duration: 0.5 }}
           className="flex justify-center mt-12"
         >
-          <motion.a
+          <a
             href="#about"
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="inline-flex items-center justify-center w-10 h-10 border-2 border-border bg-card neo-shadow-sm neo-press"
+            className="inline-flex items-center justify-center w-10 h-10 border-2 border-border bg-card neo-shadow-sm neo-press animate-bounce-arrow"
             aria-label="Scroll ke bawah"
           >
             <ArrowDown className="w-5 h-5" />
-          </motion.a>
+          </a>
         </motion.div>
       </div>
     </section>

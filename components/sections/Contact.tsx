@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mail, GitBranch, ExternalLink } from 'lucide-react'
+import { Mail, GitBranch, ExternalLink, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -10,6 +10,8 @@ import { NeoCard } from '@/components/ui/neo-card'
 import { portfolioData } from '@/lib/portfolio-data'
 import { useState } from 'react'
 import { sendEmail } from '@/app/actions'
+import { cn } from '@/lib/utils'
+
 
 const contactLinks = [
   {
@@ -93,7 +95,22 @@ export function Contact() {
             onSubmit={handleSubmit}
             className="md:col-span-3"
           >
-            <NeoCard shadow="lg" className="p-6 md:p-8 space-y-4 h-full">
+            <NeoCard shadow="lg" className="relative p-6 md:p-8 space-y-4 h-full">
+              {submitted && (
+                <div className="absolute inset-0 pointer-events-none z-10">
+                  {[...Array(8)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute w-2 h-2 bg-primary border border-border"
+                      style={{
+                        top: '50%',
+                        left: '50%',
+                        animation: `confetti-${i % 4} 1s ease-out forwards`
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
               <h3 className="text-lg font-extrabold uppercase tracking-tight">Kirim Pesan</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Input
@@ -124,14 +141,20 @@ export function Contact() {
               <Button
                 type="submit"
                 size="lg"
-                className="w-full"
+                className={cn(
+                  "w-full",
+                  isSubmitting && "animate-pulse-scale",
+                )}
                 disabled={isSubmitting || submitted}
               >
-                {isSubmitting
-                  ? 'Mengirim...'
-                  : submitted
-                  ? '✓ Pesan Terkirim!'
-                  : 'Kirim Pesan'}
+                {isSubmitting ? (
+                  <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin-brutal" />
+                ) : submitted ? (
+                  <span className="flex items-center gap-2">
+                    <Check className="w-5 h-5 animate-check-pop" />
+                    Pesan Terkirim!
+                  </span>
+                ) : 'Kirim Pesan'}
               </Button>
             </NeoCard>
           </motion.form>

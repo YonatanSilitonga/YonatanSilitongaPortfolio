@@ -44,8 +44,17 @@ export function FeaturedProjectCard({
         <NeoCard
           shadow="lg"
           press
-          className="overflow-hidden h-full flex flex-col cursor-pointer"
+          className="relative overflow-hidden h-full flex flex-col cursor-pointer"
         >
+          {isFeatured && (
+            <div className="absolute -top-3 -right-3 px-3 py-1 bg-primary text-primary-foreground border-2 border-border neo-shadow font-extrabold text-xs uppercase animate-badge-bounce z-10">
+              FEATURED
+            </div>
+          )}
+
+          {/* Animated border on hover */}
+          <div className="absolute inset-0 border-4 border-primary opacity-0 group-hover:opacity-100 group-hover:animate-border-draw pointer-events-none z-10" />
+
           <div
             className={cn(
               'relative w-full overflow-hidden bg-accent border-b-2 border-border flex items-center justify-center',

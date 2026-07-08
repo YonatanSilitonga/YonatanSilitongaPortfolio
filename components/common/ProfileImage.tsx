@@ -25,13 +25,13 @@ export function ProfileImage({ className = '' }: ProfileImageProps) {
 
       {/* Bingkai Persegi Foto */}
       <div
-        className="relative w-48 h-48 md:w-64 md:h-64 rounded-none bg-primary overflow-hidden border-2 border-border shadow-[8px_8px_0px_var(--shadow-color)] p-2"
+        className="group relative w-48 h-48 md:w-64 md:h-64 rounded-none bg-primary overflow-hidden border-2 border-border shadow-[8px_8px_0px_var(--shadow-color)] p-2"
       >
         <Image
           src={avatarUrl}
           alt={portfolioData.personal.name}
           fill
-          className="object-cover rounded-none"
+          className="object-cover rounded-none group-hover:animate-glitch-subtle"
           priority
         />
       </div>
