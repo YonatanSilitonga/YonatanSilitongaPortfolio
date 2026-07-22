@@ -116,7 +116,7 @@ export function Hero() {
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </a>
-            <a href="/resume.pdf" download>
+            <a href="/resume.pdf" download="Resume - Yonatan Rizky Partogi Silitonga.pdf">
               <Button size="lg" variant="outline" className="gap-2">
                 <Download className="w-4 h-4" />
                 Unduh CV
