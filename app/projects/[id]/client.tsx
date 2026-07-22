@@ -257,13 +257,15 @@ export function ProjectCaseStudyClient({ project }: { project: typeof portfolioD
               className="space-y-4 pt-8 border-t-2 border-border"
             >
               <SectionTitle title="Jelajahi Kode" centered={false} number="08" />
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1">
-                  <Button size="lg" className="gap-2 w-full">
-                    <GitBranch className="w-4 h-4" />
-                    Lihat di GitHub
-                  </Button>
-                </a>
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+                {project.github.map((link, idx) => (
+                  <a key={idx} href={link.url} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[200px]">
+                    <Button size="lg" className="gap-2 w-full">
+                      <GitBranch className="w-4 h-4" />
+                      Lihat di GitHub{link.label !== 'GitHub' ? ` (${link.label})` : ''}
+                    </Button>
+                  </a>
+                ))}
                 {project.demo && (
                   <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex-1">
                     <Button size="lg" variant="outline" className="gap-2 w-full">
